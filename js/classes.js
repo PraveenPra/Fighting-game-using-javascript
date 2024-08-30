@@ -76,6 +76,7 @@ class Fighter extends Sprite {
     framesCurrent = 0,
     framesHold = 5,
     offset = { x: 0, y: 0 },
+    sprites,
   }) {
     // where is this sprite iniatialised
     super({
@@ -108,6 +109,12 @@ class Fighter extends Sprite {
     };
     this.isAttacking;
     this.health = 100;
+    this.sprites = sprites;
+
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
+    }
   }
 
   update() {

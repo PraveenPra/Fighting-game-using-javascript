@@ -35,10 +35,20 @@ const player = new Fighter({
   position: { x: 0, y: 0 },
   velocity: { x: 0, y: 0 },
   offset: { x: 0, y: 0 },
-  imageSrc: "./assets/character/samuraiMack/Idle.png",
+  imageSrc: "./assets/character/samuraiMack/Run.png",
   framesMax: 8,
   scale: 2,
   offset: { x: 5, y: 0 },
+  sprites: {
+    idle: {
+      imageSrc: "./assets/character/samuraiMack/Idle.png",
+      framesMax: 8,
+    },
+    run: {
+      imageSrc: "./assets/character/samuraiMack/Run.png",
+      framesMax: 8,
+    },
+  },
 });
 
 // - player.draw(); ->this will only draw once initially. but we want it to draw everyframe so move it into update and put update in animation frame
@@ -72,12 +82,15 @@ function animate() {
   //   enemy.update();
 
   //player movement
+  player.image = player.sprites.idle.image;
   player.velocity.x = 0; //to stop pressing/moving
   if (keys.a.pressed && player.lastkey === "a") {
     //moving/pressed
     player.velocity.x = -5;
+    player.image = player.sprites.run.image;
   } else if (keys.d.pressed && player.lastkey === "d") {
     player.velocity.x = 5;
+    player.image = player.sprites.run.image;
   }
 
   //enemy movement
