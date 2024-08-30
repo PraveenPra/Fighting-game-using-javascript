@@ -162,6 +162,15 @@ function animate() {
         player.isAttacking = false
 console.log('x detect')
     }
+
+    if( rectangularCollision({
+        rectange1:enemy,
+        rectange2:player
+    })
+        && enemy.isAttacking){
+        enemy.isAttacking = false
+console.log('enemy attack')
+    }
 }
 
 animate()
@@ -199,6 +208,9 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowUp':
             enemy.velocity.y = -20;
             break;
+            case 'ArrowDown':
+                enemy.attack()
+                break;
     }
 })
 
