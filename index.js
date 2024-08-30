@@ -30,7 +30,7 @@ const shop = new Sprite({
   framesMax: 6,
 });
 
-//#region Create Player & Enemy
+//#region Player & Enemy
 const player = new Fighter({
   position: { x: 0, y: 0 },
   velocity: { x: 0, y: 0 },
@@ -47,6 +47,14 @@ const player = new Fighter({
     run: {
       imageSrc: "./assets/character/samuraiMack/Run.png",
       framesMax: 8,
+    },
+    jump: {
+      imageSrc: "./assets/character/samuraiMack/Jump.png",
+      framesMax: 2,
+    },
+    fall: {
+      imageSrc: "./assets/character/samuraiMack/Fall.png",
+      framesMax: 2,
     },
   },
 });
@@ -81,16 +89,23 @@ function animate() {
   player.update();
   //   enemy.update();
 
-  //player movement
-  player.image = player.sprites.idle.image;
+  //#region movement
   player.velocity.x = 0; //to stop pressing/moving
   if (keys.a.pressed && player.lastkey === "a") {
     //moving/pressed
     player.velocity.x = -5;
-    player.image = player.sprites.run.image;
+    player.switchSprite("run");
   } else if (keys.d.pressed && player.lastkey === "d") {
     player.velocity.x = 5;
-    player.image = player.sprites.run.image;
+    player.switchSprite("run");
+  } else {
+    player.switchSprite("idle");
+  }
+
+  if (player.velocity.y < 0) {
+    player.switchSprite("jump");
+  } else if (player.velocity.y > 0) {
+    player.switchSprite("fall");
   }
 
   //enemy movement
@@ -101,7 +116,7 @@ function animate() {
   } else if (keys.ArrowRight.pressed && enemy.lastkey === "ArrowRight") {
     enemy.velocity.x = 5;
   }
-
+  //#endregion
   //detect collision
   //logic : our right side of attackbox shud be greater or equal to the left side of enemy position and also the left side of the player shud not be less than the right side of the enemy
 
