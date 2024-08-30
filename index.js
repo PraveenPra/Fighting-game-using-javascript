@@ -53,10 +53,10 @@ class Sprite {
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         //attackbox
-        // if(this.isAttacking){
+        if(this.isAttacking){
         c.fillStyle = 'green'
         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-        // }
+        }
     }
 
     update() {
@@ -160,7 +160,7 @@ function animate() {
     })
         && player.isAttacking){
         player.isAttacking = false
-console.log('x detect')
+document.querySelector('#enemyHealth').style.width = '20%';
     }
 
     if( rectangularCollision({
