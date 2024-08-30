@@ -26,6 +26,7 @@ class Sprite {
         // where is this sprite iniatialised
         this.position = position
         this.velocity = velocity
+        this.width = 50
         this.height = 150
         this.color = color
         // if ur pressing mulitiple keys, we want the last pressed key to act above others
@@ -44,7 +45,7 @@ class Sprite {
     draw() {
         //character
         c.fillStyle = this.color;
-        c.fillRect(this.position.x, this.position.y, 50, this.height);
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         //attackbox
         c.fillStyle = 'green'
@@ -114,6 +115,17 @@ function animate() {
         enemy.velocity.x = -5
     } else if (keys.ArrowRight.pressed && enemy.lastkey === 'ArrowRight') {
         enemy.velocity.x = 5
+    }
+
+    //detect collision
+    //logic : our right side of attackbox shud be greater or equal to the left side of enemy position and also the left side of the player shud not be less than the right side of the enemy
+
+    //same on y axis the bottom of player attackbox shud not be upper than the top of enemy. ie when player jump above the enemy , he cant detect collision
+
+    if(player.attackBox.position.x + player.attackBox.width >= enemy.position.x && player.attackBox.position.x <= enemy.position.x + enemy.width
+        
+    ){
+console.log('x detect')
     }
 }
 
