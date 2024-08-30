@@ -35,12 +35,15 @@
             height:30px;
         }
 
-        .timer{
+        #timer{
             background: violet;
             width: 100px;
             height:100px; 
             /* this skrinks based on available space, we dont want that. we need fixed width  */
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .enemy-health{
           position: relative;
@@ -63,7 +66,7 @@
                 style="position: absolute; background: red; top:0;right: 0;bottom: 0;width: 100%;"></div>
             </div>
 
-            <div class="timer"></div>
+            <div id="timer">10</div>
 
             <div class="enemy-health" >
                 <div  style="background: yellow; height: 30px;"></div>
@@ -73,6 +76,10 @@
             </div>
             
         </section>
+
+        <section
+        id="displayText" 
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0; color: aliceblue; display: none; align-items: center; justify-content: center;">Tie</section>
         <canvas></canvas>
     </main>
     <script src="index.js"></script>
