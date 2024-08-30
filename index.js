@@ -16,10 +16,7 @@ const keys = {
   ArrowRight: { pressed: false },
 };
 
-// ----------------------------------
-
-// ------------------------------------
-// create a player and enemy
+//#region Create Player & Enemy
 const player = new Fighter({
   position: { x: 0, y: 0 },
   velocity: { x: 0, y: 0 },
@@ -34,10 +31,9 @@ const enemy = new Fighter({
   color: "blue",
   offset: { x: 50, y: 0 },
 });
+//#endregion
 
-// - enemy.draw();
-
-// -----------------------------
+//#region Collision
 function rectangularCollision({ rectange1, rectange2 }) {
   return (
     rectange1.attackBox.position.x + rectange1.attackBox.width >=
@@ -48,7 +44,9 @@ function rectangularCollision({ rectange1, rectange2 }) {
     rectange1.attackBox.position.y <= rectange2.position.y + rectange2.height
   );
 }
-//--------------------------------
+//#endregion
+
+//#region Winner
 function determineWinner({ player, enemy, timerId }) {
   clearTimeout(timerId);
   let d = document.querySelector("#displayText");
@@ -61,7 +59,9 @@ function determineWinner({ player, enemy, timerId }) {
     d.innerHTML = "Player 2 Wins";
   }
 }
-// -----------------------------------
+//#endregion
+
+//#region  Timer
 let timer = 30;
 let timerId;
 function decreaseTimer() {
@@ -77,7 +77,9 @@ function decreaseTimer() {
   }
 }
 decreaseTimer();
-// --------------------------------------
+//#endregion
+
+//#region Animate
 // create an infinite loop/animation loop to keep going on and on
 
 function animate() {
@@ -146,10 +148,10 @@ function animate() {
 }
 
 animate();
-
+//#endregion
 // ------------------------------------
 // moving player and enemy with event listeners
-
+//#region Keys
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
@@ -203,3 +205,4 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+//#endregion
