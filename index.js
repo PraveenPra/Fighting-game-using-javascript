@@ -39,6 +39,7 @@ class Sprite {
             width: 100,
             height: 50
         }
+        this.isAttacking
     }
 
     // how does the sprite look
@@ -123,7 +124,8 @@ function animate() {
     //same on y axis the bottom of player attackbox shud not be upper than the top of enemy. ie when player jump above the enemy , he cant detect collision
 
     if(player.attackBox.position.x + player.attackBox.width >= enemy.position.x && player.attackBox.position.x <= enemy.position.x + enemy.width
-        
+        && player.attackBox.position.y + player.attackBox.height >= enemy.position.y && player.attackBox.position.y <= enemy.position.y + enemy.height
+        && player.isAttacking
     ){
 console.log('x detect')
     }
