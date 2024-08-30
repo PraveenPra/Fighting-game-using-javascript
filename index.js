@@ -15,6 +15,12 @@ const keys = {
   ArrowLeft: { pressed: false },
   ArrowRight: { pressed: false },
 };
+const background = new Sprite({
+  position: { x: 0, y: 0 },
+  imageSrc: "./assets/background/background_layer_1.png",
+  width: canvas.width,
+  height: canvas.height,
+});
 
 //#region Create Player & Enemy
 const player = new Fighter({
@@ -91,6 +97,7 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
 
   //draw characters
+  background.update();
   player.update();
   enemy.update();
 

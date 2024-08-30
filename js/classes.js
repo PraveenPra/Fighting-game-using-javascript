@@ -2,15 +2,25 @@
 
 class Sprite {
   // + we are putting args in 1 object so that the order of which should come first etc and dependencies are solved
-  constructor({ position }) {
+  constructor({ position, imageSrc, width = 50, height = 150 }) {
     // where is this sprite iniatialised
     this.position = position;
-    this.width = 50;
-    this.height = 150;
+    this.width = width;
+    this.height = height;
+    this.image = new Image(); //create an img tag through js object property
+    this.image.src = imageSrc;
   }
 
   // how does the sprite look
-  draw() {}
+  draw() {
+    c.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
+  }
 
   update() {
     this.draw();
