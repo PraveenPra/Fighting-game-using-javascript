@@ -44,6 +44,7 @@ class Sprite {
             offset
         }
         this.isAttacking
+        this.health = 100
     }
 
     // how does the sprite look
@@ -160,7 +161,8 @@ function animate() {
     })
         && player.isAttacking){
         player.isAttacking = false
-document.querySelector('#enemyHealth').style.width = '20%';
+        enemy.health -= 20;
+document.querySelector('#enemyHealth').style.width = enemy.health + '%';
     }
 
     if( rectangularCollision({
