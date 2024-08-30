@@ -12,6 +12,8 @@ class Sprite {
     this.scale = scale;
     this.framesMax = framesMax;
     this.framesCurrent = 0; //to make background image start at 0,0
+    this.framesElapsed = 0; //hw mny frames have been moved/animated
+    this.framesHold = 5; //speed of sprite animation - for every 10 frame move to next frame
   }
 
   // how does the sprite look
@@ -31,13 +33,16 @@ class Sprite {
 
   update() {
     this.draw();
+    this.framesElapsed++;
 
-    //sprite animation
-    //-1 because for backgnd images it flikkers the screen
-    if (this.framesCurrent < this.framesMax - 1) {
-      this.framesCurrent++;
-    } else {
-      this.framesCurrent = 0;
+    if (this.framesElapsed % this.framesHold === 0) {
+      //sprite animation
+      //-1 because for backgnd images it flikkers the screen
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++;
+      } else {
+        this.framesCurrent = 0;
+      }
     }
   }
 }
