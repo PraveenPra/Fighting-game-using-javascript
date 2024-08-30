@@ -2,28 +2,43 @@
 
 class Sprite {
   // + we are putting args in 1 object so that the order of which should come first etc and dependencies are solved
-  constructor({ position, imageSrc, width = 50, height = 150 }) {
+  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
     // where is this sprite iniatialised
     this.position = position;
-    this.width = width;
-    this.height = height;
+    this.width = 50;
+    this.height = 100;
     this.image = new Image(); //create an img tag through js object property
     this.image.src = imageSrc;
+    this.scale = scale;
+    this.framesMax = framesMax;
+    this.framesCurrent = 0; //to make background image start at 0,0
   }
 
   // how does the sprite look
   draw() {
     c.drawImage(
       this.image,
+      this.framesCurrent * (this.image.width / this.framesMax), //this will result in 0 for backgrnd images and calculate next frame for anim images
+      0,
+      this.image.width / this.framesMax,
+      this.image.height,
       this.position.x,
       this.position.y,
-      this.width,
-      this.height
+      (this.image.width / this.framesMax) * this.scale,
+      this.image.height * this.scale
     );
   }
 
   update() {
     this.draw();
+
+    //sprite animation
+    //-1 because for backgnd images it flikkers the screen
+    if (this.framesCurrent < this.framesMax - 1) {
+      this.framesCurrent++;
+    } else {
+      this.framesCurrent = 0;
+    }
   }
 }
 
@@ -88,7 +103,8 @@ class Fighter {
 
     this.position.y += this.velocity.y;
 
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+    //96 is ground height
+    if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
     } else {
       this.velocity.y += gravity;
