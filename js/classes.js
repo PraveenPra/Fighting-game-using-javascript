@@ -116,7 +116,7 @@ class Fighter extends Sprite {
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
   }
-
+  //#region update
   update() {
     this.draw();
     this.animateFrames();
@@ -133,11 +133,12 @@ class Fighter extends Sprite {
     //96 is ground height
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
+      this.position.y = 330;
     } else {
       this.velocity.y += gravity;
     }
   }
-
+  //#endregion
   attack() {
     this.isAttacking = true;
 
@@ -145,6 +146,8 @@ class Fighter extends Sprite {
       this.isAttacking = false;
     }, 100);
   }
+
+  //#region switch sprite
   switchSprite(sprite) {
     switch (sprite) {
       case "idle":
@@ -185,6 +188,8 @@ class Fighter extends Sprite {
         }
     }
   }
+
+  //#endregion
 }
 
 //#endregion
