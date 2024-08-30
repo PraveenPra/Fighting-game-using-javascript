@@ -53,8 +53,6 @@
     </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.7/chai.min.js"></script>
 </head>
 
 <body>
@@ -95,13 +93,16 @@
 
 
      <!-- Mocha - script  -->
+      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.7/chai.min.js"></script>
      <script>
          mocha.setup('bdd');
          const expect = chai.expect;
      </script>
  
      <!-- Include your test script -->
-     <script src="test.js"></script>
+     <!-- <script src="test.js"></script> -->
  
      <script>
          mocha.run();

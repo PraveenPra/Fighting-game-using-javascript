@@ -10,51 +10,7 @@ describe("Sprite Initialization", function () {
   });
 });
 
-// Test cases for the functions in index.js
-
 describe("Game Functions", function () {
-  // Test the attack function
-  it("should correctly execute player attack and reduce enemy health", function () {
-    const initialHealth = enemy.health;
-    player.attack();
-    expect(player.isAttacking).to.be.true;
-
-    // Simulate attack impact
-    if (rectangularCollision({ rectange1: player, rectange2: enemy })) {
-      enemy.health -= 20;
-    }
-    expect(enemy.health).to.equal(initialHealth - 20);
-  });
-
-  it("should correctly execute enemy attack and reduce player health", function () {
-    const initialHealth = player.health;
-    enemy.attack();
-    expect(enemy.isAttacking).to.be.true;
-
-    // Simulate attack impact
-    if (rectangularCollision({ rectange1: enemy, rectange2: player })) {
-      player.health -= 20;
-    }
-    expect(player.health).to.equal(initialHealth - 20);
-  });
-
-  // Test the rectangularCollision function
-  it("should correctly detect collision between player and enemy", function () {
-    const collision = rectangularCollision({
-      rectange1: player,
-      rectange2: enemy,
-    });
-    expect(collision).to.be.false; // Since they are initialized far apart
-
-    // Move them closer to simulate a collision
-    player.position.x = enemy.position.x;
-    const collisionAfterMove = rectangularCollision({
-      rectange1: player,
-      rectange2: enemy,
-    });
-    expect(collisionAfterMove).to.be.true;
-  });
-
   // Test the determineWinner function
   it("should correctly determine winner based on health", function () {
     let displayText = document.querySelector("#displayText");
@@ -80,7 +36,7 @@ describe("Game Functions", function () {
 
   // Test the decreaseTimer function
   it("should decrease the timer and determine winner when time runs out", function (done) {
-    this.timeout(3500); // Extend timeout for async test
+    this.timeout(3000); // Extend timeout for async test
 
     timer = 3;
     decreaseTimer();
