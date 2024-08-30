@@ -109,6 +109,15 @@ const enemy = new Sprite({
 
 // - enemy.draw();
 
+
+// -----------------------------
+function rectangularCollision({rectange1,rectange2}){
+    return (
+        rectange1.attackBox.position.x + rectange1.attackBox.width >= rectange2.position.x && rectange1.attackBox.position.x <= rectange2.position.x + rectange2.width
+        && rectange1.attackBox.position.y + rectange1.attackBox.height >= rectange2.position.y && rectange1.attackBox.position.y <= rectange2.position.y + rectange2.height
+    
+    )
+}
 // --------------------------------------
 // create an infinite loop/animation loop to keep going on and on 
 
@@ -145,10 +154,11 @@ function animate() {
 
     //same on y axis the bottom of player attackbox shud not be upper than the top of enemy. ie when player jump above the enemy , he cant detect collision
 
-    if(player.attackBox.position.x + player.attackBox.width >= enemy.position.x && player.attackBox.position.x <= enemy.position.x + enemy.width
-        && player.attackBox.position.y + player.attackBox.height >= enemy.position.y && player.attackBox.position.y <= enemy.position.y + enemy.height
-        && player.isAttacking
-    ){
+    if( rectangularCollision({
+        rectange1:player,
+        rectange2:enemy
+    })
+        && player.isAttacking){
         player.isAttacking = false
 console.log('x detect')
     }
