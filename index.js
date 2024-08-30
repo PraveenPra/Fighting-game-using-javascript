@@ -35,6 +35,10 @@ const player = new Fighter({
   position: { x: 0, y: 0 },
   velocity: { x: 0, y: 0 },
   offset: { x: 0, y: 0 },
+  imageSrc: "./assets/character/samuraiMack/Idle.png",
+  framesMax: 8,
+  scale: 2,
+  offset: { x: 5, y: 0 },
 });
 
 // - player.draw(); ->this will only draw once initially. but we want it to draw everyframe so move it into update and put update in animation frame
@@ -65,7 +69,7 @@ function animate() {
   background.update();
   shop.update();
   player.update();
-  enemy.update();
+  //   enemy.update();
 
   //player movement
   player.velocity.x = 0; //to stop pressing/moving

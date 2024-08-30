@@ -2,7 +2,15 @@
 
 class Sprite {
   // + we are putting args in 1 object so that the order of which should come first etc and dependencies are solved
-  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
+  constructor({
+    position,
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    framesCurrent = 0,
+    framesHold = 5,
+    offset = { x: 0, y: 0 },
+  }) {
     // where is this sprite iniatialised
     this.position = position;
     this.width = 50;
@@ -11,9 +19,10 @@ class Sprite {
     this.image.src = imageSrc;
     this.scale = scale;
     this.framesMax = framesMax;
-    this.framesCurrent = 0; //to make background image start at 0,0
+    this.framesCurrent = framesCurrent; //to make background image start at 0,0
     this.framesElapsed = 0; //hw mny frames have been moved/animated
-    this.framesHold = 5; //speed of sprite animation - for every 10 frame move to next frame
+    this.framesHold = framesHold; //speed of sprite animation - for every 10 frame move to next frame
+    this.offset = offset;
   }
 
   // how does the sprite look
@@ -24,15 +33,14 @@ class Sprite {
       0,
       this.image.width / this.framesMax,
       this.image.height,
-      this.position.x,
-      this.position.y,
+      this.position.x - this.offset.x,
+      this.position.y - this.offset.y,
       (this.image.width / this.framesMax) * this.scale,
       this.image.height * this.scale
     );
   }
 
-  update() {
-    this.draw();
+  animateFrames() {
     this.framesElapsed++;
 
     if (this.framesElapsed % this.framesHold === 0) {
@@ -45,21 +53,45 @@ class Sprite {
       }
     }
   }
+  update() {
+    this.draw();
+    this.animateFrames();
+  }
 }
 
 //#endregion
 
 //#region Fighter Class
 
-class Fighter {
+class Fighter extends Sprite {
   // + we are putting args in 1 object so that the order of which should come first etc and dependencies are solved
-  constructor({ position, velocity, lastkey, color = "red", offset }) {
+  constructor({
+    position,
+    velocity,
+    lastkey,
+    color = "red",
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    framesCurrent = 0,
+    framesHold = 5,
+    offset = { x: 0, y: 0 },
+  }) {
     // where is this sprite iniatialised
-    this.position = position;
+    super({
+      position,
+      imageSrc,
+      scale,
+      framesMax,
+      framesCurrent,
+      framesHold,
+      offset,
+    });
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
     this.color = color;
+
     // if ur pressing mulitiple keys, we want the last pressed key to act above others
     this.lastkey = lastkey;
 
@@ -78,26 +110,9 @@ class Fighter {
     this.health = 100;
   }
 
-  // how does the sprite look
-  draw() {
-    //character
-    c.fillStyle = this.color;
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-    //attackbox
-    if (this.isAttacking) {
-      c.fillStyle = "green";
-      c.fillRect(
-        this.attackBox.position.x,
-        this.attackBox.position.y,
-        this.attackBox.width,
-        this.attackBox.height
-      );
-    }
-  }
-
   update() {
     this.draw();
+    this.animateFrames();
 
     this.attackBox.position.x = this.position.x - this.attackBox.offset.x;
 
