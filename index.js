@@ -59,6 +59,14 @@ const player = new Fighter({
       imageSrc: "./assets/character/samuraiMack/Attack1.png",
       framesMax: 6,
     },
+    takeHit: {
+      imageSrc: "./assets/character/samuraiMack/TakeHitwhite.png",
+      framesMax: 4,
+    },
+    death: {
+      imageSrc: "./assets/character/samuraiMack/Death.png",
+      framesMax: 6,
+    },
   },
   attackBox: {
     //offset till the sword distance i need the attackbox to hit enemy
@@ -98,6 +106,14 @@ const enemy = new Fighter({
     },
     attack1: {
       imageSrc: "./assets/character/samuraiMack/Attack1.png",
+      framesMax: 6,
+    },
+    takeHit: {
+      imageSrc: "./assets/character/samuraiMack/TakeHitWhite.png",
+      framesMax: 4,
+    },
+    death: {
+      imageSrc: "./assets/character/samuraiMack/Death.png",
       framesMax: 6,
     },
   },
@@ -184,8 +200,9 @@ function animate() {
     player.isAttacking &&
     player.framesCurrent === 4 //dont want to reduce health before animation finished
   ) {
+    enemy.takeHit();
     player.isAttacking = false;
-    enemy.health -= 20;
+
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
   //if player misses attack
@@ -201,8 +218,9 @@ function animate() {
     enemy.isAttacking &&
     enemy.framesCurrent === 4
   ) {
+    player.takeHit();
     enemy.isAttacking = false;
-    player.health -= 20;
+
     document.querySelector("#playerHealth").style.width = player.health + "%";
   }
 

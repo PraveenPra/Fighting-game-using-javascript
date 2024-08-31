@@ -152,15 +152,34 @@ class Fighter extends Sprite {
     this.isAttacking = true;
   }
 
+  takeHit() {
+    this.health -= 10;
+    if (this.health <= 0) {
+      this.switchSprite("death");
+    } else {
+      this.switchSprite("takeHit");
+    }
+  }
   //#region switch sprite
   switchSprite(sprite) {
     if (
+      //override other animations with attack anim
       // to attack only once
       this.image === this.sprites.attack1.image &&
       this.framesCurrent < this.sprites.attack1.framesMax - 1
     ) {
       return;
     }
+
+    if (
+      //override other animations with takeHit anim
+      // to attack only once
+      this.image === this.sprites.takeHit.image &&
+      this.framesCurrent < this.sprites.takeHit.framesMax - 1
+    ) {
+      return;
+    }
+
     switch (sprite) {
       case "idle":
         if (this.image !== this.sprites.idle.image) {
@@ -203,10 +222,18 @@ class Fighter extends Sprite {
       case "attack1":
         if (this.image !== this.sprites.attack1.image) {
           this.image = this.sprites.attack1.image;
-          console.log(this.image);
           this.framesMax = this.sprites.attack1.framesMax;
 
           this.framesCurrent = 3; //i want the attack to be quick so skipper some frames
+        }
+        break;
+
+      case "takeHit":
+        if (this.image !== this.sprites.takeHit.image) {
+          this.image = this.sprites.takeHit.image;
+          this.framesMax = this.sprites.takeHit.framesMax;
+
+          this.framesCurrent = 0;
         }
         break;
     }
