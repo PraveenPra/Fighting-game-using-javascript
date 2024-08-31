@@ -61,6 +61,12 @@ const player = new Fighter({
       framesMax: 6,
     },
   },
+  attackBox: {
+    //offset till the sword distance i need the attackbox to hit enemy
+    offset: { x: -200, y: -150 },
+    width: 160,
+    height: 50,
+  },
 });
 
 // - player.draw(); ->this will only draw once initially. but we want it to draw everyframe so move it into update and put update in animation frame
@@ -95,6 +101,11 @@ const enemy = new Fighter({
       imageSrc: "./assets/character/samuraiMack/Attack1.png",
       framesMax: 6,
     },
+  },
+  attackBox: {
+    offset: { x: -200, y: -150 },
+    width: 170,
+    height: 50,
   },
 });
 //#endregion
