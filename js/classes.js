@@ -202,7 +202,7 @@ class Fighter extends Sprite {
           console.log(this.image);
           this.framesMax = this.sprites.attack1.framesMax;
 
-          this.framesCurrent = 0;
+          this.framesCurrent = 3; //i want the attack to be quick so skipper some frames
         }
         break;
     }
