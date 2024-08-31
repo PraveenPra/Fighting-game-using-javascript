@@ -61,20 +61,20 @@
 
             <div class="player-health" style="display: flex;justify-content: flex-end;">
                 <!-- need 100% width to visible this background  -->
-                <div style="background: yellow; height: 30px;width: 100%;"></div>
+                <div style="background: red; height: 30px;width: 100%;"></div>
 
                 <!-- remove left:0 - we want the health decrease ui to be in same direction -->
                 <div id="playerHealth"
-                style="position: absolute; background: red; top:0;right: 0;bottom: 0;width: 100%;"></div>
+                style="position: absolute; background: green; top:0;right: 0;bottom: 0;width: 100%;"></div>
             </div>
 
             <div id="timer">10</div>
 
             <div class="enemy-health" >
-                <div  style="background: yellow; height: 30px;"></div>
+                <div  style="background: red; height: 30px;"></div>
 
                 <div id="enemyHealth"
-                style="position: absolute; background: blue; top:0;left:0;right: 0;bottom: 0;"></div>
+                style="position: absolute; background: green; top:0;left:0;right: 0;bottom: 0;"></div>
             </div>
             
         </section>
@@ -85,6 +85,8 @@
         <canvas></canvas>
     </main>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Mocha Test Runner -->
     <!-- <div id="mocha"></div> -->
     <script src="js/utils.js"></script>

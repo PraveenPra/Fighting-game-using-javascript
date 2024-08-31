@@ -23,7 +23,7 @@ const background = new Sprite({
 });
 
 const shop = new Sprite({
-  position: { x: 600, y: 128 },
+  position: { x: 600, y: 315 },
   imageSrc: "./assets/decorations/shop_anim.png",
   scale: 2,
   framesMax: 6,
@@ -142,11 +142,20 @@ function animate() {
   //draw characters
   background.update();
   shop.update();
+
+  //to make our player move visible than background
+  c.fillStyle = "rgba(255, 255, 255, 0.15)";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+
+  //ground
+  c.fillStyle = "brown";
+  c.fillRect(0, 570, canvas.width, canvas.height);
+
   player.update();
   enemy.update();
 
   //only for testing
-  drawGrid();
+  // drawGrid();
 
   //#region movement
   player.velocity.x = 0; //to stop pressing/moving
@@ -187,7 +196,7 @@ function animate() {
     enemy.switchSprite("fall");
   }
   //#endregion
-  //detect collision
+  //# region collision
   //logic : our right side of attackbox shud be greater or equal to the left side of enemy position and also the left side of the player shud not be less than the right side of the enemy
 
   //same on y axis the bottom of player attackbox shud not be upper than the top of enemy. ie when player jump above the enemy , he cant detect collision
@@ -203,7 +212,10 @@ function animate() {
     enemy.takeHit();
     player.isAttacking = false;
 
-    document.querySelector("#enemyHealth").style.width = enemy.health + "%";
+    // document.querySelector("#enemyHealth").style.width = enemy.health + "%";
+    gsap.to("#enemyHealth", {
+      width: enemy.health + "%",
+    });
   }
   //if player misses attack
   if (player.isAttacking && player.framesCurrent === 6) {
@@ -221,9 +233,13 @@ function animate() {
     player.takeHit();
     enemy.isAttacking = false;
 
-    document.querySelector("#playerHealth").style.width = player.health + "%";
+    // document.querySelector("#playerHealth").style.width = player.health + "%";
+    gsap.to("#playerHealth", {
+      width: player.health + "%",
+    });
   }
 
+  //#endregion
   //if enemy misses attack
   if (enemy.isAttacking && enemy.framesCurrent === 6) {
     enemy.isAttacking = false;
