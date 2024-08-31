@@ -31,7 +31,7 @@ const shop = new Sprite({
 
 //#region Player & Enemy
 const player = new Fighter({
-  position: { x: 0, y: 0 },
+  position: { x: 0, y: 250 },
   velocity: { x: 0, y: 0 },
   offset: { x: 0, y: 0 },
   imageSrc: "./assets/character/samuraiMack/Run.png",
@@ -71,7 +71,7 @@ const player = new Fighter({
 // - player.draw(); ->this will only draw once initially. but we want it to draw everyframe so move it into update and put update in animation frame
 
 const enemy = new Fighter({
-  position: { x: 400, y: 100 },
+  position: { x: 400, y: 250 },
   velocity: { x: 0, y: 0 },
   color: "blue",
   offset: { x: 50, y: 0 },
