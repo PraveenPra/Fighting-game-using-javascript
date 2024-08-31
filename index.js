@@ -70,6 +70,32 @@ const enemy = new Fighter({
   velocity: { x: 0, y: 0 },
   color: "blue",
   offset: { x: 50, y: 0 },
+  imageSrc: "./assets/character/samuraiMack/Idle.png",
+  framesMax: 8,
+  scale: 2,
+  offset: { x: 5, y: 0 },
+  sprites: {
+    idle: {
+      imageSrc: "./assets/character/samuraiMack/Idle.png",
+      framesMax: 8,
+    },
+    run: {
+      imageSrc: "./assets/character/samuraiMack/Run.png",
+      framesMax: 8,
+    },
+    jump: {
+      imageSrc: "./assets/character/samuraiMack/Jump.png",
+      framesMax: 2,
+    },
+    fall: {
+      imageSrc: "./assets/character/samuraiMack/Fall.png",
+      framesMax: 2,
+    },
+    attack1: {
+      imageSrc: "./assets/character/samuraiMack/Attack1.png",
+      framesMax: 6,
+    },
+  },
 });
 //#endregion
 
@@ -91,7 +117,7 @@ function animate() {
   background.update();
   shop.update();
   player.update();
-  //   enemy.update();
+  enemy.update();
 
   //#region movement
   player.velocity.x = 0; //to stop pressing/moving
