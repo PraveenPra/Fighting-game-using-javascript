@@ -41,3 +41,39 @@ function decreaseTimer() {
     determineWinner({ player, enemy, timerId });
   }
 }
+
+//#region draw grid lines
+
+// Draw grid lines
+function drawGrid(gridSize = 50, color = "green") {
+  const width = canvas.width;
+  const height = canvas.height;
+
+  // Set the stroke color for the grid lines
+  c.strokeStyle = "green";
+  c.font = "12px Arial"; // Set the font for the numbers
+  c.fillStyle = color; // Set the color for the text
+  // Draw vertical grid lines
+  for (let x = gridSize; x < width; x += gridSize) {
+    // let x = gridSize;
+    c.beginPath();
+    c.moveTo(x, 0);
+    c.lineTo(x, height);
+    c.stroke();
+    // Draw the number for the x-axis
+    c.fillText(`x${x}`, x + 2, 12); // Adjust the position to avoid overlap with the grid line
+  }
+
+  // Draw horizontal grid lines
+  for (let y = gridSize; y < height; y += gridSize) {
+    c.beginPath();
+    c.moveTo(0, y);
+    c.lineTo(width, y);
+    c.stroke();
+    c.fillText(`y${y}`, 2, y - 2); // Adjust the position to avoid overlap with the grid line
+  }
+}
+
+// Call the function to draw the grid
+
+//#endregion

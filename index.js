@@ -5,7 +5,6 @@ canvas.width = 1024;
 canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
-
 //--------------------------------
 const gravity = 0.7;
 const keys = {
@@ -103,8 +102,8 @@ const enemy = new Fighter({
     },
   },
   attackBox: {
-    offset: { x: -200, y: -150 },
-    width: 170,
+    offset: { x: -300, y: -150 },
+    width: 80,
     height: 50,
   },
 });
@@ -130,6 +129,9 @@ function animate() {
   player.update();
   enemy.update();
 
+  //only for testing
+  drawGrid();
+
   //#region movement
   player.velocity.x = 0; //to stop pressing/moving
   if (keys.a.pressed && player.lastkey === "a") {
@@ -143,6 +145,7 @@ function animate() {
     player.switchSprite("idle");
   }
 
+  //jump
   if (player.velocity.y < 0) {
     player.switchSprite("jump");
   } else if (player.velocity.y > 0) {
@@ -178,11 +181,16 @@ function animate() {
       rectange1: player,
       rectange2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.framesCurrent === 4 //dont want to reduce health before animation finished
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
+  }
+  //if player misses attack
+  if (player.isAttacking && player.framesCurrent === 6) {
+    player.isAttacking = false;
   }
 
   if (
@@ -190,11 +198,17 @@ function animate() {
       rectange1: enemy,
       rectange2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.framesCurrent === 4
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
+  }
+
+  //if enemy misses attack
+  if (enemy.isAttacking && enemy.framesCurrent === 6) {
+    enemy.isAttacking = false;
   }
 
   //game over : when the health goes out
